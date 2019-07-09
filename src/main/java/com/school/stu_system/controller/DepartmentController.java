@@ -3,6 +3,8 @@ package com.school.stu_system.controller;
 import com.school.stu_system.domain.Department;
 import com.school.stu_system.domain.Student;
 import com.school.stu_system.service.DepartmentService;
+import com.school.stu_system.util.ResponseBean;
+import com.school.stu_system.util.ResponseBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,39 +25,39 @@ public class DepartmentController {
 
 
     @GetMapping
-    public ResponseEntity<List<Department>> findAllDepartments()
+    public ResponseBean findAllDepartments()
     {
-        return new ResponseEntity<List<Department>>(departmentService.findAllDepartments(), HttpStatus.OK);
+        return  new ResponseBean<>(true, departmentService.findAllDepartments());
     }
 
 
     @GetMapping(value = "/{department_id}")
-    public ResponseEntity<Department> findDepartmentById(@PathVariable("department_id") Integer department_id)
+    public ResponseBean findDepartmentById(@PathVariable("department_id") Integer department_id)
     {
-        return new ResponseEntity<Department>(departmentService.findDepartmentById(department_id), HttpStatus.OK);
+        return new ResponseBean<>(true,departmentService.findDepartmentById(department_id));
     }
 
 
     @PostMapping
-    public ResponseEntity<Department> createDepartment(@RequestBody Department department)
+    public ResponseBean createDepartment(@RequestBody Department department)
     {
-        return new ResponseEntity<>(departmentService.createDepartment(department), HttpStatus.CREATED);
+        return new ResponseBean<>(true,departmentService.createDepartment(department));
     }
     @PutMapping
-    public ResponseEntity<Department> updateDepartment(@RequestBody Department department)
+    public ResponseBean updateDepartment(@RequestBody Department department)
     {
-        return new ResponseEntity<>(departmentService.updateDepartment(department), HttpStatus.OK);
+        return  new ResponseBean<>(true,departmentService.updateDepartment(department));
     }
 
     @DeleteMapping(value = "/{department_id}")
-    public ResponseEntity<Department> deleteDepartment(@PathVariable("department_id") Integer department_id)
+    public ResponseBean deleteDepartment(@PathVariable("department_id") Integer department_id)
     {
-        return new ResponseEntity<>(departmentService.deleteDepartment(department_id), HttpStatus.NO_CONTENT);
+        return  new ResponseBean<>(true,departmentService.deleteDepartment(department_id));
     }
     @GetMapping(value = "/students/{department_id}")
-    public ResponseEntity<List<Student>> findStudentByDepartment(@PathVariable("department_id") Integer department_id)
+    public ResponseBean findStudentByDepartment(@PathVariable("department_id") Integer department_id)
     {
-        return new ResponseEntity<List<Student>>(departmentService.findStudentByDepartment(department_id), HttpStatus.OK);
+        return  new ResponseBean<>(true,departmentService.findStudentByDepartment(department_id));
     }
 
 

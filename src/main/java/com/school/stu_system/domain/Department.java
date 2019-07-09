@@ -22,7 +22,7 @@ public class Department implements Serializable {
 	@Column(name="department_id")
 	private Integer id;
 
-	@Column(length = 100,name="department_name")
+	@Column(length = 100,name="department_name",nullable = false)
 	private String name;
 
 

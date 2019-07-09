@@ -2,6 +2,8 @@ package com.school.stu_system.service;
 
 import com.school.stu_system.domain.Student;
 import com.school.stu_system.repository.StudentDao;
+import com.school.stu_system.util.UnicomResponseEnums;
+import com.school.stu_system.util.UnicomRuntimeException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,14 +32,17 @@ public class StudentService {
     */
     public Student deleteStudent(Integer id)
     {
-        Optional<Student> student = studentDao.findById(id);
-        if(student.isPresent())
+        Optional<Student> student_op = studentDao.findById(id);
+        if(student_op.isPresent())
         {
-            studentDao.delete(student.get());
-            return student.get();
+            studentDao.delete(student_op.get());
+            return student_op.get();
         }
-        else
-            return null;
+        else{
+            throw new UnicomRuntimeException(UnicomResponseEnums.NO_RECORD);
+
+        }
+
     }
 
     /*
@@ -45,20 +50,36 @@ public class StudentService {
     */
     public Student updateStudent(Student student)
     {
-        return studentDao.saveAndFlush(student);
+        Optional<Student> student_op = studentDao.findById(student.getId());
+        if(student_op.isPresent())
+        {
+            return studentDao.saveAndFlush(student);
+
+        }
+        else{
+            throw new UnicomRuntimeException(UnicomResponseEnums.NO_RECORD);
+
+        }
+
+
+
+
+
     }
     /*
     查1条
     */
     public Student findStudentById(Integer id)
     {
-        Optional<Student> student = studentDao.findById(id);
-        if(student.isPresent())
+        Optional<Student> student_op = studentDao.findById(id);
+        if(student_op.isPresent())
         {
-            return student.get();
+            return student_op.get();
         }
-        else
-            return null;
+        else{
+            throw new UnicomRuntimeException(UnicomResponseEnums.NO_RECORD);
+
+        }
     }
     /*
     查全部
