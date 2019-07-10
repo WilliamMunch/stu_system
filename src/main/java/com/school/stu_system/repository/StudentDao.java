@@ -13,6 +13,6 @@ import java.util.List;
 public interface StudentDao extends JpaRepository<Student,Integer> {
 
 //    @Query(value ="select * from t_student  where department_id=?1",nativeQuery = true)
-//    List<Student> findByDepartment( @Param("department_id") Integer department_id);
+//    Set<Student> findByDepartment( @Param("department_id") Integer department_id);
 
 }

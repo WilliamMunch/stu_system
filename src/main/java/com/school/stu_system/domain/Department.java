@@ -27,15 +27,15 @@ public class Department implements Serializable {
 
 
 
-	@OneToMany(mappedBy = "department",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "department",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
 	@JsonIgnore
-	private List<Student> students;
-//list是有序的，set是无序的，前者可以重复，后者不可以
-	public List<Student> getStudents() {
+	private Set<Student> students;
+	//list是有序的，set是无序的，前者可以重复，后者不可以
+	public Set<Student> getStudents() {
 		return students;
 	}
 
-	public void setStudents(List<Student> students) {
+	public void setStudents(Set<Student> students) {
 		this.students = students;
 	}
 	public Integer getId() {

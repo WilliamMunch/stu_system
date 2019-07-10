@@ -4,8 +4,9 @@ import com.school.stu_system.domain.Department;
 import com.school.stu_system.domain.Student;
 import com.school.stu_system.repository.DepartmentDao;
 import com.school.stu_system.repository.StudentDao;
-import com.school.stu_system.util.UnicomResponseEnums;
-import com.school.stu_system.util.UnicomRuntimeException;
+import com.school.stu_system.domain.MyResponseEnums;
+import com.school.stu_system.domain.MyRuntimeException;
+import com.school.stu_system.util.UpdateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +28,7 @@ public class DepartmentService {
     */
     public Department createDepartment(Department department)
     {
+        department.setId(null);//确保saveAndFlush不会走更新，只走新增这条路
         return departmentDao.saveAndFlush(department);
     }
     /*
@@ -41,7 +43,7 @@ public class DepartmentService {
             return department_op.get();
         }
         else{
-            throw new UnicomRuntimeException(UnicomResponseEnums.NO_RECORD);
+            throw new MyRuntimeException(MyResponseEnums.NO_RECORD);
 
         }
     }
@@ -54,10 +56,11 @@ public class DepartmentService {
         Optional<Department> department_op = departmentDao.findById(department.getId());
         if(department_op.isPresent())
         {
+            UpdateUtil.copyNullProperties(department_op.get(), department);
             return departmentDao.saveAndFlush(department);
         }
         else{
-            throw new UnicomRuntimeException(UnicomResponseEnums.NO_RECORD);
+            throw new MyRuntimeException(MyResponseEnums.NO_RECORD);
 
         }
 
@@ -76,7 +79,7 @@ public class DepartmentService {
             return department_op.get();
         }
         else{
-            throw new UnicomRuntimeException(UnicomResponseEnums.NO_RECORD);
+            throw new MyRuntimeException(MyResponseEnums.NO_RECORD);
 
         }
     }
@@ -90,10 +93,10 @@ public class DepartmentService {
     /*
     查询学院下所有学生
      */
-//    public List<Student> findStudentByDepartment(Integer departmentId) {
+//    public Set<Student> findStudentByDepartment(Integer departmentId) {
 //        return studentDao.findByDepartment(departmentId);
 //    }
-    public List<Student> findStudentByDepartment(Integer departmentId) {
+    public Set<Student> findStudentsByDepartment(Integer departmentId) {
 
             return findDepartmentById(departmentId).getStudents();
 

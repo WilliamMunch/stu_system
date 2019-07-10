@@ -1,21 +1,15 @@
 package com.school.stu_system.controller;
 
 import com.school.stu_system.domain.Department;
-import com.school.stu_system.domain.Student;
 import com.school.stu_system.service.DepartmentService;
-import com.school.stu_system.util.ResponseBean;
-import com.school.stu_system.util.ResponseBean;
+import com.school.stu_system.domain.MyResponse;
+import com.school.stu_system.domain.MyResponseEnums;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Set;
 
 
 @RestController
-@RequestMapping(value = "/departments")
+@RequestMapping(value = "")
 public class DepartmentController {
     @Autowired
     DepartmentService departmentService;
@@ -24,41 +18,37 @@ public class DepartmentController {
 
 
 
-    @GetMapping
-    public ResponseBean findAllDepartments()
+    @GetMapping(value = "/departments")
+    public MyResponse findAllDepartments()
     {
-        return  new ResponseBean<>(true, departmentService.findAllDepartments());
+        return  new MyResponse<>(true, departmentService.findAllDepartments(), MyResponseEnums.OPERATE_SUCCESS );
     }
 
 
-    @GetMapping(value = "/{department_id}")
-    public ResponseBean findDepartmentById(@PathVariable("department_id") Integer department_id)
+    @GetMapping(value = "/departments/{department_id}")
+    public MyResponse findDepartmentById(@PathVariable("department_id") Integer department_id)
     {
-        return new ResponseBean<>(true,departmentService.findDepartmentById(department_id));
+        return new MyResponse<>(true,departmentService.findDepartmentById(department_id), MyResponseEnums.OPERATE_SUCCESS );
     }
 
 
-    @PostMapping
-    public ResponseBean createDepartment(@RequestBody Department department)
+    @PostMapping(value = "/departments")
+    public MyResponse createDepartment(@RequestBody Department department)
     {
-        return new ResponseBean<>(true,departmentService.createDepartment(department));
+        return new MyResponse<>(true,departmentService.createDepartment(department), MyResponseEnums.OPERATE_SUCCESS );
     }
-    @PutMapping
-    public ResponseBean updateDepartment(@RequestBody Department department)
+    @PutMapping(value = "/departments")
+    public MyResponse updateDepartment(@RequestBody Department department)
     {
-        return  new ResponseBean<>(true,departmentService.updateDepartment(department));
+        return  new MyResponse<>(true,departmentService.updateDepartment(department), MyResponseEnums.OPERATE_SUCCESS );
     }
 
-    @DeleteMapping(value = "/{department_id}")
-    public ResponseBean deleteDepartment(@PathVariable("department_id") Integer department_id)
+    @DeleteMapping(value = "/departments/{department_id}")
+    public MyResponse deleteDepartment(@PathVariable("department_id") Integer department_id)
     {
-        return  new ResponseBean<>(true,departmentService.deleteDepartment(department_id));
+        return  new MyResponse<>(true,departmentService.deleteDepartment(department_id), MyResponseEnums.OPERATE_SUCCESS );
     }
-    @GetMapping(value = "/students/{department_id}")
-    public ResponseBean findStudentByDepartment(@PathVariable("department_id") Integer department_id)
-    {
-        return  new ResponseBean<>(true,departmentService.findStudentByDepartment(department_id));
-    }
+
 
 
 

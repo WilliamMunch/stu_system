@@ -1,7 +1,8 @@
 package com.school.stu_system.util;
 
-import org.springframework.core.Ordered;
-import org.springframework.core.annotation.Order;
+import com.school.stu_system.domain.MyResponse;
+import com.school.stu_system.domain.MyResponseEnums;
+import com.school.stu_system.domain.MyRuntimeException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -15,9 +16,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 
-import org.springframework.validation.BindException;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.NoHandlerFoundException;
 
 import java.net.ConnectException;
 import java.sql.SQLException;
@@ -30,10 +29,10 @@ import java.sql.SQLException;
  * @create: 2019-07-07 20:51
  **/
 @RestControllerAdvice(annotations={RestController.class,Controller.class})
-public class SpringExceptionHandle {
+public class ExceptionHandleUtil {
 
 
-    private static final Logger logger = LoggerFactory.getLogger(SpringExceptionHandle.class);
+    private static final Logger logger = LoggerFactory.getLogger(ExceptionHandleUtil.class);
 
 
     /*
@@ -57,9 +56,9 @@ public class SpringExceptionHandle {
     @ExceptionHandler(value={SQLException.class,DataAccessException.class})
     @ResponseBody
     @ResponseStatus(value=HttpStatus.OK)
-    public ResponseBean<String> systemError(Exception e){
+    public MyResponse<String> systemError(Exception e){
         logger.error("occurs error when execute method ,message {}",e.getMessage());
-        return new ResponseBean<>(false, UnicomResponseEnums.DATABASE_ERROR);
+        return new MyResponse<>(false, MyResponseEnums.DATABASE_ERROR);
     }
     /**
      * 远程连接失败
@@ -69,9 +68,9 @@ public class SpringExceptionHandle {
     @ExceptionHandler(value={ConnectException.class})
     @ResponseBody
     @ResponseStatus(value=HttpStatus.OK)
-    public ResponseBean<String> connect(Exception e){
+    public MyResponse<String> connect(Exception e){
         logger.error("occurs error when execute method ,message {}",e.getMessage());
-        return new ResponseBean<>(false, UnicomResponseEnums.CONNECTION_ERROR);
+        return new MyResponse<>(false, MyResponseEnums.CONNECTION_ERROR);
     }
 
 
@@ -83,13 +82,13 @@ public class SpringExceptionHandle {
      * @param request
      * @return
      */
-    @ExceptionHandler(value={UnicomRuntimeException.class})
+    @ExceptionHandler(value={MyRuntimeException.class})
     @ResponseBody
     @ResponseStatus(value=HttpStatus.OK)
-    public <T> ResponseBean<T> sendError(UnicomRuntimeException exception,HttpServletRequest request){
+    public <T> MyResponse<T> sendError(MyRuntimeException exception, HttpServletRequest request){
         String requestURI = request.getRequestURI();
         logger.error("occurs error when execute url ={} ,message {}",requestURI,exception.getMsg());
-        return new ResponseBean<>(false,exception.getCode(),exception.getMsg());
+        return new MyResponse<>(false,exception.getCode(),exception.getMsg());
     }
 
 }

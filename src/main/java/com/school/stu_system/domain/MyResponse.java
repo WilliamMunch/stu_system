@@ -1,4 +1,4 @@
-package com.school.stu_system.util;
+package com.school.stu_system.domain;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
@@ -24,7 +24,7 @@ Include.NON_NULL（当Value 为null 不输出）
  */
 //如果是null 不返回
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class ResponseBean <T> implements Serializable {
+public class MyResponse<T> implements Serializable {
     private static final long serialVersionUID = -131753924340496746L;
     
     private boolean success;//是否成功
@@ -32,9 +32,9 @@ public class ResponseBean <T> implements Serializable {
     private String code;//  成功/失败编码
     private String msg;// 对应编码的含义
 
-    public ResponseBean(){}
+    public MyResponse(){}
 
-    public ResponseBean(boolean success, T data) {
+    public MyResponse(boolean success, T data) {
         super();
         this.success = success;
         this.data = data;
@@ -42,7 +42,7 @@ public class ResponseBean <T> implements Serializable {
 
     @Override
     public String toString() {
-        return "ResponseBean{" +
+        return "MyResponse{" +
                 "success=" + success +
                 ", data=" + data +
                 ", code='" + code + '\'' +
@@ -50,7 +50,7 @@ public class ResponseBean <T> implements Serializable {
                 '}';
     }
 
-    public ResponseBean(boolean success, T data, String code, String msg) {
+    public MyResponse(boolean success, T data, String code, String msg) {
         super();
         this.success = success;
         this.data = data;
@@ -58,17 +58,17 @@ public class ResponseBean <T> implements Serializable {
         this.msg = msg;
     }
 
-    public ResponseBean(boolean success, String code, String msg) {
+    public MyResponse(boolean success, String code, String msg) {
         this.success = success;
         this.code = code;
         this.msg = msg;
     }
-    public ResponseBean(boolean success,UnicomResponseEnums enums){
+    public MyResponse(boolean success, MyResponseEnums enums){
         this.success=success;
         this.code=enums.getCode();
         this.msg=enums.getMsg();
     }
-    public ResponseBean(boolean success,T data,UnicomResponseEnums enums){
+    public MyResponse(boolean success, T data, MyResponseEnums enums){
         this.success=success;
         this.data=data;
         this.code=enums.getCode();

@@ -1,4 +1,6 @@
-package com.school.stu_system.util;
+package com.school.stu_system.domain;
+
+import com.school.stu_system.domain.MyResponseEnums;
 
 /**
  * @program: stu_system
@@ -6,7 +8,7 @@ package com.school.stu_system.util;
  * @author: William Munch
  * @create: 2019-07-08 13:07
  **/
-public class UnicomRuntimeException extends RuntimeException {
+public class MyRuntimeException extends RuntimeException {
 
     private static final long serialVersionUID = 6863853281199294164L;
     protected String code;
@@ -15,11 +17,11 @@ public class UnicomRuntimeException extends RuntimeException {
 
 
 
-    public UnicomRuntimeException() {
+    public MyRuntimeException() {
         super();
     }
 
-    public UnicomRuntimeException(UnicomResponseEnums enums) {
+    public MyRuntimeException(MyResponseEnums enums) {
         super();
         this.code = enums.getCode();
         this.msg = enums.getMsg();

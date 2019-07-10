@@ -1,4 +1,4 @@
-package com.school.stu_system.util;
+package com.school.stu_system.domain;
 
 /**
  * @program: stu_system
@@ -6,7 +6,7 @@ package com.school.stu_system.util;
  * @author: William Munch
  * @create: 2019-07-08 13:06
  **/
-public enum UnicomResponseEnums {
+public enum MyResponseEnums {
 
     //Config Error 1xxx  基础配置异常
     CONNECTION_ERROR("1000","网络连接请求失败"),
@@ -42,7 +42,7 @@ public enum UnicomResponseEnums {
     UNAUTHORIZED("4001","未经授权"),
     PAYMENT_REQUIRED("4002","付费请求"),
     FORBIDDEN("4003","资源不可用"),
-    NOT_FOUND("4004","找不到页面"),
+    NOT_FOUND("4004","无效的访问路径"),
     METHOD_NOT_ALLOWED("4005","不合法的请求方式"),
     NOT_ACCEPTABLE("4006","不可接受"),
     PROXY_AUTHENTICATION_REQUIRED("4007","需要代理身份验证"),
@@ -74,7 +74,7 @@ public enum UnicomResponseEnums {
 
     private String code;
     private String msg;
-    private UnicomResponseEnums(String code, String msg) {
+    private MyResponseEnums(String code, String msg) {
 
         this.code = code;
         this.msg = msg;
