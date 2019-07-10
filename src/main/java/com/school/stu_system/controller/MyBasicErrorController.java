@@ -6,6 +6,7 @@ import com.school.stu_system.domain.MyResponseEnums;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import springfox.documentation.annotations.ApiIgnore;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -19,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
  **/
 
 @RestController
+@ApiIgnore
 public class MyBasicErrorController implements ErrorController {
 
     private static final String ERROR_PATH ="/error";
