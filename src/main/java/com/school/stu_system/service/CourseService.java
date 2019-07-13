@@ -63,10 +63,6 @@ public class CourseService {
             throw new MyRuntimeException(MyResponseEnums.NO_RECORD);
 
         }
-
-
-
-
     }
     /*
     查1条
@@ -92,8 +88,7 @@ public class CourseService {
     }
     /*
     查询一门课下的所有学生
-     */
-
+    */
     public Set<Student> findStudentsByCourse(Integer courseId) {
 
         return findCourseById(courseId).getStudents();

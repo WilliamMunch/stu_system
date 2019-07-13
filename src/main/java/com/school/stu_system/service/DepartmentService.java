@@ -93,12 +93,11 @@ public class DepartmentService {
     /*
     查询学院下所有学生
      */
-//    public Set<Student> findStudentByDepartment(Integer departmentId) {
-//        return studentDao.findByDepartment(departmentId);
-//    }
     public Set<Student> findStudentsByDepartment(Integer departmentId) {
 
             return findDepartmentById(departmentId).getStudents();
-
     }
+    //    public Set<Student> findStudentByDepartment(Integer departmentId) {
+    //        return studentDao.findByDepartment(departmentId);
+    //    }
 }

@@ -14,6 +14,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 
+
+
+
+/*
+
+RESTful api设计规范
+/zoos              所有动物园
+/zoos/1/animals    id为1的动物园中的所有动物
+/zoos/1            id为1的动物园
+/zoos/1;2;3        id为1，2，3的动物园
+
+*/
+
 @RestController
 @RequestMapping(value = "")
 @Api(tags="学生数据接口")
