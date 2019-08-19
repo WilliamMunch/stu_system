@@ -20,24 +20,24 @@ import java.util.Set;
  **/
 @Entity
 @Table(name = "t_course")
-@JsonIgnoreProperties(value = { "hibernateLazyInitializer", "handler" })
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 
-public class Course  implements Serializable {
+public class Course implements Serializable {
 
     private static final long serialVersionUID = -4310210227936391905L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="course_id")
+    @Column(name = "course_id")
     private Integer id;
 
-    @Column(length = 100,name="course_name",nullable = false)
+    @Column(length = 100, name = "course_name", nullable = false)
     private String name;
 
     //双向多对多
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "t_student_course",
-            joinColumns = @JoinColumn(name="course_id",referencedColumnName="course_id"),
-            inverseJoinColumns = @JoinColumn(name="student_id",referencedColumnName="student_id"))
+            joinColumns = @JoinColumn(name = "course_id", referencedColumnName = "course_id"),
+            inverseJoinColumns = @JoinColumn(name = "student_id", referencedColumnName = "student_id"))
     @JsonIgnore
     private Set<Student> students;
 

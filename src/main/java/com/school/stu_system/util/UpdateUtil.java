@@ -1,4 +1,5 @@
 package com.school.stu_system.util;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
@@ -14,15 +15,15 @@ import java.util.Set;
  * @create: 2019-07-10 15:36
  **/
 public class UpdateUtil {
-/**
- * 将目标源中不为空的字段过滤，将数据库中查出的数据源复制到提交的目标源中
- *
- * @param source 用id从数据库中查出来的数据源
- * @param target 提交的实体，目标源
- */
-public static void copyNullProperties(Object source, Object target) {
-    BeanUtils.copyProperties(source, target, getNoNullProperties(target));
-}
+    /**
+     * 将目标源中不为空的字段过滤，将数据库中查出的数据源复制到提交的目标源中
+     *
+     * @param source 用id从数据库中查出来的数据源
+     * @param target 提交的实体，目标源
+     */
+    public static void copyNullProperties(Object source, Object target) {
+        BeanUtils.copyProperties(source, target, getNoNullProperties(target));
+    }
 
     /**
      * @param target 目标源数据

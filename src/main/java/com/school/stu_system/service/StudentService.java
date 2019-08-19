@@ -28,62 +28,55 @@ public class StudentService {
     /*
     增
     */
-    public Student createStudent(Student student)
-    {
+    public Student createStudent(Student student) {
         student.setId(null);//确保saveAndFlush不会走更新，只走新增这条路
 
         return studentDao.saveAndFlush(student);
     }
+
     /*
     删
     */
-    public Student deleteStudent(Integer id)
-    {
+    public Student deleteStudent(Integer id) {
         Optional<Student> student_op = studentDao.findById(id);
-        if(student_op.isPresent())
-        {
+        if (student_op.isPresent()) {
             studentDao.delete(student_op.get());
             return student_op.get();
-        }
-        else{
+        } else {
             throw new MyRuntimeException(MyResponseEnums.NO_RECORD);
         }
     }
+
     /*
     改
     */
-    public Student updateStudent(Student student)
-    {
+    public Student updateStudent(Student student) {
         Optional<Student> student_op = studentDao.findById(student.getId());
-        if(student_op.isPresent())
-        {
+        if (student_op.isPresent()) {
             UpdateUtil.copyNullProperties(student_op.get(), student);
             return studentDao.saveAndFlush(student);
-        }
-        else{
+        } else {
             throw new MyRuntimeException(MyResponseEnums.NO_RECORD);
         }
     }
+
     /*
     查1条
     */
-    public Student findStudentById(Integer id)
-    {
+    public Student findStudentById(Integer id) {
         Optional<Student> student_op = studentDao.findById(id);
-        if(student_op.isPresent())
-        {
+        if (student_op.isPresent()) {
             return student_op.get();
-        }
-        else{
+        } else {
             throw new MyRuntimeException(MyResponseEnums.NO_RECORD);
 
         }
     }
+
     /*
     查全部
     */
-    public List<Student> findAllStudents()
-    {
+    public List<Student> findAllStudents() {
         return studentDao.findAll();
     }
 
@@ -96,27 +89,27 @@ public class StudentService {
         return findStudentById(studentId).getCourses();
 
     }
+
     /*
     一个学生选一门课
      */
-    public Student selectCourseByStudent(Integer studentId,Integer courseId)
-    {
-        Student student=findStudentById(studentId);
-        Course course=courseService.findCourseById(courseId);
-        Set<Course> courses=student.getCourses();
+    public Student selectCourseByStudent(Integer studentId, Integer courseId) {
+        Student student = findStudentById(studentId);
+        Course course = courseService.findCourseById(courseId);
+        Set<Course> courses = student.getCourses();
         courses.add(course);
         student.setCourses(courses);
         return updateStudent(student);
 
     }
+
     /*
     一个学生退选一门课
     */
-    public Student withdrawCourseByStudent(Integer studentId,Integer courseId)
-    {
-        Student student=findStudentById(studentId);
-        Course course=courseService.findCourseById(courseId);
-        Set<Course> courses=student.getCourses();
+    public Student withdrawCourseByStudent(Integer studentId, Integer courseId) {
+        Student student = findStudentById(studentId);
+        Course course = courseService.findCourseById(courseId);
+        Set<Course> courses = student.getCourses();
         courses.remove(course);
         student.setCourses(courses);
         return updateStudent(student);

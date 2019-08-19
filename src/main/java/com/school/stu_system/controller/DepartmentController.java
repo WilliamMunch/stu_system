@@ -14,68 +14,57 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "")
-@Api(tags="学院数据接口")
+@Api(tags = "学院数据接口")
 public class DepartmentController {
     @Autowired
     DepartmentService departmentService;
 
 
-
-
-    @ApiOperation(value="查询所有学院信息")
+    @ApiOperation(value = "查询所有学院信息")
     @GetMapping(value = "/departments")
-    public MyResponse findAllDepartments()
-    {
-        return  new MyResponse<>(true, departmentService.findAllDepartments(), MyResponseEnums.OPERATE_SUCCESS );
+    public MyResponse findAllDepartments() {
+        return new MyResponse<>(true, departmentService.findAllDepartments(), MyResponseEnums.OPERATE_SUCCESS);
     }
 
 
-
-    @ApiOperation(value="查询某一学院信息")
+    @ApiOperation(value = "查询某一学院信息")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "department_id", value = "学院号", required = true, paramType = "path")
     })
     @GetMapping(value = "/departments/{department_id}")
-    public MyResponse findDepartmentById(@PathVariable("department_id") Integer department_id)
-    {
-        return new MyResponse<>(true,departmentService.findDepartmentById(department_id), MyResponseEnums.OPERATE_SUCCESS );
+    public MyResponse findDepartmentById(@PathVariable("department_id") Integer department_id) {
+        return new MyResponse<>(true, departmentService.findDepartmentById(department_id), MyResponseEnums.OPERATE_SUCCESS);
     }
 
 
-    @ApiOperation(value="添加某一学院信息")
+    @ApiOperation(value = "添加某一学院信息")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "department", value = "学院实体", required = true, paramType = "body")
     })
     @PostMapping(value = "/departments")
-    public MyResponse createDepartment(@RequestBody Department department)
-    {
-        return new MyResponse<>(true,departmentService.createDepartment(department), MyResponseEnums.OPERATE_SUCCESS );
+    public MyResponse createDepartment(@RequestBody Department department) {
+        return new MyResponse<>(true, departmentService.createDepartment(department), MyResponseEnums.OPERATE_SUCCESS);
     }
 
 
-
-    @ApiOperation(value="更新某一学院信息")
+    @ApiOperation(value = "更新某一学院信息")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "department", value = "学院实体", required = true, paramType = "body")
     })
     @PutMapping(value = "/departments")
-    public MyResponse updateDepartment(@RequestBody Department department)
-    {
-        return  new MyResponse<>(true,departmentService.updateDepartment(department), MyResponseEnums.OPERATE_SUCCESS );
+    public MyResponse updateDepartment(@RequestBody Department department) {
+        return new MyResponse<>(true, departmentService.updateDepartment(department), MyResponseEnums.OPERATE_SUCCESS);
     }
 
 
-    @ApiOperation(value="删除某一学院信息")
+    @ApiOperation(value = "删除某一学院信息")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "department_id", value = "学院号", required = true, paramType = "path")
     })
     @DeleteMapping(value = "/departments/{department_id}")
-    public MyResponse deleteDepartment(@PathVariable("department_id") Integer department_id)
-    {
-        return  new MyResponse<>(true,departmentService.deleteDepartment(department_id), MyResponseEnums.OPERATE_SUCCESS );
+    public MyResponse deleteDepartment(@PathVariable("department_id") Integer department_id) {
+        return new MyResponse<>(true, departmentService.deleteDepartment(department_id), MyResponseEnums.OPERATE_SUCCESS);
     }
-
-
 
 
 }

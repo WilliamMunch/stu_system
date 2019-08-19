@@ -26,23 +26,20 @@ public class CourseService {
     /*
     增
     */
-    public Course createCourse(Course course)
-    {
+    public Course createCourse(Course course) {
         course.setId(null);//确保saveAndFlush不会走更新，只走新增这条路
         return courseDao.saveAndFlush(course);
     }
+
     /*
     删
     */
-    public Course deleteCourse(Integer id)
-    {
+    public Course deleteCourse(Integer id) {
         Optional<Course> course_op = courseDao.findById(id);
-        if(course_op.isPresent())
-        {
+        if (course_op.isPresent()) {
             courseDao.delete(course_op.get());
             return course_op.get();
-        }
-        else{
+        } else {
             throw new MyRuntimeException(MyResponseEnums.NO_RECORD);
 
         }
@@ -51,41 +48,37 @@ public class CourseService {
     /*
     改
     */
-    public Course updateCourse(Course course)
-    {
+    public Course updateCourse(Course course) {
         Optional<Course> course_op = courseDao.findById(course.getId());
-        if(course_op.isPresent())
-        {
+        if (course_op.isPresent()) {
             UpdateUtil.copyNullProperties(course_op.get(), course);
             return courseDao.saveAndFlush(course);
-        }
-        else{
+        } else {
             throw new MyRuntimeException(MyResponseEnums.NO_RECORD);
 
         }
     }
+
     /*
     查1条
     */
-    public Course findCourseById(Integer id)
-    {
+    public Course findCourseById(Integer id) {
         Optional<Course> course_op = courseDao.findById(id);
-        if(course_op.isPresent())
-        {
+        if (course_op.isPresent()) {
             return course_op.get();
-        }
-        else{
+        } else {
             throw new MyRuntimeException(MyResponseEnums.NO_RECORD);
 
         }
     }
+
     /*
     查全部
     */
-    public List<Course> findAllCourses()
-    {
+    public List<Course> findAllCourses() {
         return courseDao.findAll();
     }
+
     /*
     查询一门课下的所有学生
     */

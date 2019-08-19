@@ -16,7 +16,6 @@ public class MyRuntimeException extends RuntimeException {
     protected String msg;
 
 
-
     public MyRuntimeException() {
         super();
     }

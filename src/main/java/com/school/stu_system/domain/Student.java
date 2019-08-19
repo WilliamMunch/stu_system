@@ -10,23 +10,23 @@ import java.util.Set;
 
 @Entity
 @Table(name = "t_student")
-@JsonIgnoreProperties(value = { "hibernateLazyInitializer", "handler" })
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"})
 public class Student implements Serializable {
 
-	private static final long serialVersionUID = 6407320892506939654L;
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="student_id")
-	private Integer id;
+    private static final long serialVersionUID = 6407320892506939654L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "student_id")
+    private Integer id;
 
-	@Column(length = 100,name="student_name",nullable = false)
-	private String name;
+    @Column(length = 100, name = "student_name", nullable = false)
+    private String name;
 
-	//双向多对一
-	//单双向的区别是在A获取B的信息的同时，B能否获取A的信息，能=>双，否=>单
-	@JoinColumn(name="department_id")
-	@ManyToOne(fetch = FetchType.EAGER)
-	private Department department;
+    //双向多对一
+    //单双向的区别是在A获取B的信息的同时，B能否获取A的信息，能=>双，否=>单
+    @JoinColumn(name = "department_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Department department;
 
 /*
 
@@ -35,49 +35,50 @@ public class Student implements Serializable {
     反过来，如果后面是One呢？因为它是加载一的一方，这对性能影响不是很大，所以它的默认加载策略是立即加载。
  */
 
-	//双向多对多
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "t_student_course",
-			joinColumns = @JoinColumn(name="student_id",referencedColumnName="student_id"),
-			inverseJoinColumns = @JoinColumn(name="course_id",referencedColumnName="course_id"))
-	@JsonIgnore
-	private Set<Course> courses;
+    //双向多对多
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "t_student_course",
+            joinColumns = @JoinColumn(name = "student_id", referencedColumnName = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "course_id", referencedColumnName = "course_id"))
+    @JsonIgnore
+    private Set<Course> courses;
 
-	
-	public Integer getId() {
-		return id;
-	}
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public Department getDepartment() {
-		return department;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setDepartment(Department department) {
-		this.department = department;
-	}
-	public Set<Course> getCourses() {
-		return courses;
-	}
+    public Department getDepartment() {
+        return department;
+    }
 
-	public void setCourses(Set<Course> courses) {
-		this.courses = courses;
-	}
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
 
-	public Student() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+    public Set<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(Set<Course> courses) {
+        this.courses = courses;
+    }
+
+    public Student() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
 }

@@ -25,7 +25,7 @@ public class SwaggerConfig {
                 .apiInfo(new ApiInfoBuilder()
                         .title("学生管理系统项目_接口文档")
                         .description("学生管理系统接口测试文档")
-                        .contact(new Contact("William Munch","https://github.com/WilliamMunch","wy995053971@163.com"))
+                        .contact(new Contact("William Munch", "https://github.com/WilliamMunch", "wy995053971@163.com"))
                         .version("v1.0")
                         .build())
                 .select()
@@ -33,7 +33,6 @@ public class SwaggerConfig {
                 .paths(PathSelectors.any())
                 .build();
     }
-
 
 
 }

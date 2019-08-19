@@ -26,13 +26,14 @@ Include.NON_NULL（当Value 为null 不输出）
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class MyResponse<T> implements Serializable {
     private static final long serialVersionUID = -131753924340496746L;
-    
+
     private boolean success;//是否成功
     private T data;//数据
     private String code;//  成功/失败编码
     private String msg;// 对应编码的含义
 
-    public MyResponse(){}
+    public MyResponse() {
+    }
 
     public MyResponse(boolean success, T data) {
         super();
@@ -63,38 +64,48 @@ public class MyResponse<T> implements Serializable {
         this.code = code;
         this.msg = msg;
     }
-    public MyResponse(boolean success, MyResponseEnums enums){
-        this.success=success;
-        this.code=enums.getCode();
-        this.msg=enums.getMsg();
+
+    public MyResponse(boolean success, MyResponseEnums enums) {
+        this.success = success;
+        this.code = enums.getCode();
+        this.msg = enums.getMsg();
     }
-    public MyResponse(boolean success, T data, MyResponseEnums enums){
-        this.success=success;
-        this.data=data;
-        this.code=enums.getCode();
-        this.msg=enums.getMsg();
+
+    public MyResponse(boolean success, T data, MyResponseEnums enums) {
+        this.success = success;
+        this.data = data;
+        this.code = enums.getCode();
+        this.msg = enums.getMsg();
     }
+
     public boolean isSuccess() {
         return success;
     }
+
     public void setSuccess(boolean success) {
         this.success = success;
     }
+
     public T getData() {
         return data;
     }
+
     public void setData(T data) {
         this.data = data;
     }
+
     public String getCode() {
         return code;
     }
+
     public void setCode(String code) {
         this.code = code;
     }
+
     public String getMsg() {
         return msg;
     }
+
     public void setMsg(String msg) {
         this.msg = msg;
     }

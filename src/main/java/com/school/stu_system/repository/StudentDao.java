@@ -10,7 +10,7 @@ import java.util.List;
 
 
 @Repository
-public interface StudentDao extends JpaRepository<Student,Integer> {
+public interface StudentDao extends JpaRepository<Student, Integer> {
 
 //    @Query(value ="select * from t_student  where department_id=?1",nativeQuery = true)
 //    Set<Student> findByDepartment( @Param("department_id") Integer department_id);
