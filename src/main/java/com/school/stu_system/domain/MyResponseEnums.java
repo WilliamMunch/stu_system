@@ -11,7 +11,7 @@ public enum MyResponseEnums {
     //Config Error 1xxx  基础配置异常
     CONNECTION_ERROR("1000", "网络连接请求失败"),
     DATABASE_ERROR("1001", "数据库异常"),
-
+    SYSTEM_ERROR("1002", "系统错误"),
     //Success 2xxx  业务逻辑成功
     REGISTER_SUCCESS("2000", "注册成功"),
     LOGIN_SUCCESS("2001", "登陆成功"),
